@@ -16,6 +16,7 @@ import CountUp from "./motion/CountUp";
 import AgentDemo from "./AgentDemo";
 import RewardMachine from "./RewardMachine";
 import SkillExplorer from "./SkillExplorer";
+import BuildPipeline from "./BuildPipeline";
 
 const nav = [
   { href: "#work", label: "Work" },
@@ -191,28 +192,52 @@ export function Projects() {
     <section id="projects" className="section container">
       <SectionHeading kicker="Projects" title="Things I've built" />
       <div className="cards">
-        {projects.map((p, i) => (
-          <article key={p.name} id={projectId(p.name)} className="card" data-reveal data-spotlight style={order(i)}>
-            <div className="card-top">
-              <h3>{p.name}</h3>
-              {p.status && <span className="badge">{p.status}</span>}
-            </div>
-            <p>{p.description}</p>
-            <ul className="list">
-              {p.points.map((pt) => (
-                <li key={pt}>{pt}</li>
-              ))}
-            </ul>
-            <div className="card-bottom">
-              <Tags items={p.stack} />
-              {p.link && (
-                <a href={p.link.href} className="text-link" target="_blank" rel="noreferrer">
-                  {p.link.label} →
-                </a>
+        {projects.map((p, i) => {
+          const body = (
+            <>
+              <div className="card-top">
+                <h3>{p.name}</h3>
+                {p.status && (
+                  <span className={`badge${p.status === "Live" ? " badge-live" : ""}`}>{p.status}</span>
+                )}
+              </div>
+              <p>{p.description}</p>
+              <ul className="list">
+                {p.points.map((pt) => (
+                  <li key={pt}>{pt}</li>
+                ))}
+              </ul>
+              <div className="card-bottom">
+                <Tags items={p.stack} />
+                {p.link && (
+                  <a href={p.link.href} className="text-link" target="_blank" rel="noreferrer">
+                    {p.link.label} →
+                  </a>
+                )}
+              </div>
+            </>
+          );
+          const wide = p.feature === "build-pipeline";
+          return (
+            <article
+              key={p.name}
+              id={projectId(p.name)}
+              className={`card${wide ? " card-wide" : ""}`}
+              data-reveal
+              data-spotlight
+              style={order(i)}
+            >
+              {wide ? (
+                <>
+                  <div className="card-wide-main">{body}</div>
+                  <BuildPipeline />
+                </>
+              ) : (
+                body
               )}
-            </div>
-          </article>
-        ))}
+            </article>
+          );
+        })}
       </div>
     </section>
   );

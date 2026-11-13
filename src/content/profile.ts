@@ -92,6 +92,8 @@ export type Project = {
   description: string;
   points: string[];
   link?: { label: string; href: string };
+  // Full-width card with an animated build-and-deploy pipeline
+  feature?: "build-pipeline";
 };
 
 export const projects: Project[] = [
@@ -119,6 +121,20 @@ export const projects: Project[] = [
     ],
     link: { label: "GitHub", href: "https://github.com/haolinsun0907" },
   },
+  {
+    name: "This website",
+    status: "Live",
+    feature: "build-pipeline",
+    stack: ["Next.js", "React", "TypeScript", "Vercel", "Claude Code"],
+    description:
+      "The site you're on. I built it end to end with an AI coding agent (Claude Code): I set the direction and design, the agent wrote most of the code, and I reviewed and shipped it.",
+    points: [
+      "An interactive replay of an agent run, an animated reward-machine diagram, and skill tags that jump to where each skill was used.",
+      "Animations follow the visitor's reduced-motion setting, and the first screen never waits for JavaScript.",
+      "Every git push to GitHub deploys to Vercel automatically, live in about 30 seconds.",
+    ],
+    link: { label: "Source on GitHub", href: "https://github.com/haolinsun0907/haolin-sun-website" },
+  },
 ];
 
 export const research = {
@@ -135,6 +151,7 @@ export const skills: { group: string; items: string[] }[] = [
   { group: "ML & Retrieval", items: ["PyTorch", "Reinforcement Learning", "Model Evaluation", "Embeddings", "Vector Search", "Milvus"] },
   { group: "Programming & Data", items: ["Python", "SQL", "PostgreSQL", "Pandas", "NumPy", "ETL", "Tableau"] },
   { group: "Cloud & Development", items: ["GCP", "Vertex AI", "Docker", "Git", "Linux", "LangSmith"] },
+  { group: "Web & AI-Assisted Development", items: ["Next.js", "React", "TypeScript", "Vercel", "Claude Code"] },
 ];
 
 export const education = [
