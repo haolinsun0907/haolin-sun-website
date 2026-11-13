@@ -54,6 +54,11 @@ export default function HeaderNav({ items }: { items: Item[] }) {
   useLayoutEffect(() => {
     const measure = () => {
       const el = active ? links.current.get(active) : null;
+      // On phones the links scroll sideways: keep the active one in view.
+      const nav = el?.parentElement;
+      if (el && nav && nav.scrollWidth > nav.clientWidth) {
+        nav.scrollTo({ left: el.offsetLeft - (nav.clientWidth - el.offsetWidth) / 2, behavior: "smooth" });
+      }
       setPill((prev) =>
         el
           ? { left: el.offsetLeft, width: el.offsetWidth, hidden: false }

@@ -11,6 +11,7 @@ export const profile = {
     "I build and ship LLM agents that move real business numbers. My production agent raised right-party contact rates from 25% to 62% at about $0.10 per account. Before that, I did deep reinforcement learning research at York University.",
   summary:
     "AI engineer with an M.Sc. in Computer Science who builds and ships LLM agents in production. Background in deep reinforcement learning research (EUMAS 2023), RAG applications, and large-scale Python automation.",
+  lookingFor: "I'm looking for full-time AI Engineer roles. The fastest way to reach me is email.",
   links: {
     email: "haolinsun0907@gmail.com",
     linkedin: "https://linkedin.com/in/haolinsun0907",
@@ -36,6 +37,20 @@ export const caseStudy = {
     "Designed, built, and deployed a Gemini-powered agent with Google Agent Development Kit (ADK) on Vertex AI, working on my own end to end.",
     "The agent uses Google Search tool calls to look across official company websites, third-party directories, and PDFs and other documents to collect every contact it can find for a customer.",
     "It then scores and ranks each contact by source reliability and its own judgment, so collectors start with the most promising contact instead of working through a raw list.",
+  ],
+  // Short titles for the three approach steps, in the same order
+  approachTitles: ["Built end to end", "Searches every source", "Ranks what it finds"],
+  // Shown as a before/after chart in the Results card
+  chart: {
+    label: "Right-party contact rate",
+    before: 25,
+    after: 62,
+    note: "Measured on collectors' real call outcomes, targeted accounts",
+  },
+  // Results not already shown in the hero stats
+  highlights: [
+    { value: "+45%", label: "Dispute resolution rate" },
+    { value: "~$200", label: "A month to run ~2,000 accounts" },
   ],
   results: [
     "Right-party contact rate on targeted accounts rose from 25% to 62%, measured on collectors' real call outcomes.",

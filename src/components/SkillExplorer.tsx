@@ -18,7 +18,12 @@ export default function SkillExplorer({
     <>
       <div className="skills">
         {groups.map((g, i) => (
-          <div key={g.group} className="skill-group" data-reveal style={{ "--i": i } as React.CSSProperties}>
+          <div
+            key={g.group}
+            className="skill-group"
+            data-reveal
+            style={{ "--i": i } as React.CSSProperties}
+          >
             <h3>{g.group}</h3>
             <ul className="tags tags-interactive">
               {g.items.map((t) => (
@@ -35,29 +40,37 @@ export default function SkillExplorer({
             </ul>
           </div>
         ))}
-      </div>
 
-      <div className={`skill-result${selected ? " is-open" : ""}`} aria-live="polite">
-        {!selected ? (
-          <p className="muted">Click a skill to see where it shows up in my work.</p>
-        ) : hits.length ? (
-          <>
-            <p>
-              <strong>{selected}</strong> shows up in:
+        <div
+          className={`skill-result${selected ? " is-open" : ""}`}
+          aria-live="polite"
+          data-reveal
+          style={{ "--i": groups.length } as React.CSSProperties}
+        >
+          {!selected ? (
+            <p className="muted">
+              Click a skill to see where it shows up in my work.
             </p>
-            <ul className="skill-hits">
-              {hits.map((h, i) => (
-                <li key={h.href} style={{ "--i": i } as React.CSSProperties}>
-                  <a href={h.href}>{h.label} ↓</a>
-                </li>
-              ))}
-            </ul>
-          </>
-        ) : (
-          <p>
-            <strong>{selected}</strong> isn’t tied to a specific item on this page. Ask me about it.
-          </p>
-        )}
+          ) : hits.length ? (
+            <>
+              <p>
+                <strong>{selected}</strong> shows up in:
+              </p>
+              <ul className="skill-hits">
+                {hits.map((h, i) => (
+                  <li key={h.href} style={{ "--i": i } as React.CSSProperties}>
+                    <a href={h.href}>{h.label} ↓</a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : (
+            <p>
+              <strong>{selected}</strong> isn’t tied to a specific item on this
+              page. Ask me about it.
+            </p>
+          )}
+        </div>
       </div>
     </>
   );

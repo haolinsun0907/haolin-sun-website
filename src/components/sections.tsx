@@ -23,6 +23,7 @@ const nav = [
   { href: "#experience", label: "Experience" },
   { href: "#projects", label: "Projects" },
   { href: "#research", label: "Research" },
+  { href: "#skills", label: "Skills" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -120,39 +121,78 @@ function Tags({ items }: { items: string[] }) {
   );
 }
 
+// Before/after bars. They grow from zero when the Results card scrolls in.
+function BeforeAfter({ label, before, after, note }: { label: string; before: number; after: number; note: string }) {
+  const rows = [
+    { key: "Before", value: before, cls: "ba-before" },
+    { key: "After", value: after, cls: "ba-after" },
+  ];
+  return (
+    <figure className="ba" aria-label={`${label}: ${before}% before the agent, ${after}% after`}>
+      <figcaption className="ba-head">
+        <span>{label}</span>
+        <span className="ba-mult">{(after / before).toFixed(1)}×</span>
+      </figcaption>
+      {rows.map((r, i) => (
+        <div key={r.key} className="ba-row" aria-hidden="true">
+          <span className="ba-key">{r.key}</span>
+          <span className="ba-track">
+            <span className={`ba-bar ${r.cls}`} style={{ "--v": r.value, "--d": i } as React.CSSProperties} />
+          </span>
+          <span className="ba-val">{r.value}%</span>
+        </div>
+      ))}
+      <p className="ba-note">{note}</p>
+    </figure>
+  );
+}
+
 export function CaseStudy() {
   return (
     <section id="work" className="section container">
       <SectionHeading kicker={caseStudy.eyebrow} title={caseStudy.title} />
-      <div data-reveal>
-        <Tags items={caseStudy.stack} />
-      </div>
       <div className="case" id="case">
-        <div className="case-block" data-reveal data-spotlight style={order(0)}>
+        <div className="case-block case-problem" data-reveal data-spotlight style={order(0)}>
           <h3>
             <span className="step">01</span>Problem
           </h3>
           <p>{caseStudy.problem}</p>
+          <div className="case-stack">
+            <p className="case-label">Stack</p>
+            <Tags items={caseStudy.stack} />
+          </div>
         </div>
-        <div className="case-block" data-reveal data-spotlight style={order(1)}>
+        <div className="case-block case-results" data-reveal data-spotlight style={order(1)}>
           <h3>
-            <span className="step">02</span>Approach
+            <span className="step">02</span>Results
           </h3>
-          <ul className="list">
-            {caseStudy.approach.map((a) => (
-              <li key={a}>{a}</li>
+          <BeforeAfter {...caseStudy.chart} />
+          <dl className="case-highlights">
+            {caseStudy.highlights.map((h) => (
+              <div key={h.label}>
+                <dt>{h.label}</dt>
+                <dd>
+                  <CountUp value={h.value} />
+                </dd>
+              </div>
             ))}
-          </ul>
+          </dl>
         </div>
-        <div className="case-block case-results" data-reveal data-spotlight style={order(2)}>
+        <div className="case-block case-approach" data-reveal data-spotlight style={order(2)}>
           <h3>
-            <span className="step">03</span>Results
+            <span className="step">03</span>How it works
           </h3>
-          <ul className="list">
-            {caseStudy.results.map((r) => (
-              <li key={r}>{r}</li>
+          <ol className="approach">
+            {caseStudy.approach.map((a, i) => (
+              <li key={a}>
+                <span className="approach-n" aria-hidden="true">
+                  {i + 1}
+                </span>
+                <strong>{caseStudy.approachTitles[i]}</strong>
+                <p>{a}</p>
+              </li>
             ))}
-          </ul>
+          </ol>
         </div>
       </div>
       <AgentDemo />
@@ -290,7 +330,7 @@ export function Contact() {
       <div className="container contact-inner" data-reveal>
         <div>
           <h2>Let's talk</h2>
-          <p>I'm looking for full-time AI Engineer roles. The fastest way to reach me is email.</p>
+          <p>{profile.lookingFor}</p>
         </div>
         <div className="contact-links">
           <a href={`mailto:${profile.links.email}`} className="btn btn-primary">

@@ -36,6 +36,26 @@ export default function AgentDemo() {
 
   useEffect(() => () => void runId.current++, []);
 
+  // Play once on its own the first time the demo is mostly on screen,
+  // so visitors who never press the button still see it work.
+  const box = useRef<HTMLDivElement>(null);
+  const runRef = useRef<() => void>(() => {});
+  const hasRun = useRef(false);
+  useEffect(() => {
+    const el = box.current;
+    if (!el || !("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (!e.isIntersecting) return;
+        io.disconnect();
+        if (!hasRun.current) runRef.current();
+      },
+      { threshold: 0.45 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   useLayoutEffect(() => {
     rows.current.forEach((el, id) => {
       const prev = tops.current.get(id);
@@ -51,6 +71,7 @@ export default function AgentDemo() {
   });
 
   async function run() {
+    hasRun.current = true;
     const id = ++runId.current;
     const alive = () => runId.current === id;
     const pace = reduced ? 0.4 : 1;
@@ -86,10 +107,12 @@ export default function AgentDemo() {
     setPhase("done");
   }
 
+  runRef.current = run;
+
   const order = scored ? [...found].sort((a, b) => byId[b].score - byId[a].score) : found;
 
   return (
-    <div className="demo" data-reveal>
+    <div className="demo" data-reveal ref={box}>
       <div className="demo-head">
         <div>
           <p className="eyebrow">Try it</p>

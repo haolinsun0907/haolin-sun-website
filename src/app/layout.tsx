@@ -19,6 +19,8 @@ export const metadata: Metadata = {
     siteName: "Haolin Sun",
     type: "website",
   },
+  // Large preview card when shared on X/Twitter; the image comes from opengraph-image.tsx
+  twitter: { card: "summary_large_image" },
 };
 
 // Runs before first paint. The "motion" class lets CSS hide elements that
