@@ -159,6 +159,13 @@ export const research = {
   plain:
     "A reward machine describes a task's reward as a small state machine, which exposes structure such as subgoals that ordinary reinforcement learning has to discover on its own. This work shows how deep RL agents can use that structure when actions are continuous, as in simulated control tasks. On the benchmarks we tested, the approach reached 15x the baseline score with the same number of training steps.",
   href: "https://www.eecs.yorku.ca/~lesperan/papers/EUMAS2023acceptedVersion.pdf",
+  code: "https://github.com/haolinsun0907/Exploiting_RMs_with_DRL",
+  // Numbers as reported in the paper (Half-Cheetah domain, Section 4.1)
+  highlights: [
+    { value: "Up to 20×", label: "Faster than DDPG-CRM to reach the same score (Task 1)" },
+    { value: "~30%", label: "Higher mean reward than DDPG-CRM after 2M training steps" },
+    { value: "11 vs 8", label: "Task completions in the best episode, SAC-CRM vs DDPG-CRM" },
+  ],
 };
 
 export const skills: { group: string; items: string[] }[] = [

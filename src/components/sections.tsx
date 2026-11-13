@@ -14,7 +14,7 @@ import AgentNetwork from "./motion/AgentNetwork";
 import StreamText from "./motion/StreamText";
 import CountUp from "./motion/CountUp";
 import AgentDemo from "./AgentDemo";
-import RewardMachine from "./RewardMachine";
+import CheetahTask from "./CheetahTask";
 import SkillExplorer from "./SkillExplorer";
 import BuildPipeline from "./BuildPipeline";
 
@@ -294,11 +294,26 @@ export function Research() {
             {research.authors} · {research.venue}
           </p>
           <p>{research.plain}</p>
-          <a href={research.href} className="text-link" target="_blank" rel="noreferrer">
-            Read the paper →
-          </a>
+          <dl className="research-stats">
+            {research.highlights.map((h) => (
+              <div key={h.label}>
+                <dt>{h.label}</dt>
+                <dd>
+                  <CountUp value={h.value} />
+                </dd>
+              </div>
+            ))}
+          </dl>
+          <div className="research-links">
+            <a href={research.href} className="text-link" target="_blank" rel="noreferrer">
+              Read the paper →
+            </a>
+            <a href={research.code} className="text-link" target="_blank" rel="noreferrer">
+              Code on GitHub →
+            </a>
+          </div>
         </article>
-        <RewardMachine />
+        <CheetahTask />
       </div>
     </section>
   );

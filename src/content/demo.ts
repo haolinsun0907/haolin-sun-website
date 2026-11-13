@@ -83,19 +83,10 @@ export const agentDemo = {
   ] as DemoContact[],
 };
 
-// A textbook-style reward machine, used to explain the idea behind the paper.
-// It is not one of the paper's benchmark tasks.
-export const rewardMachine = {
-  task: "pick up the key, open the door, then reach the goal",
-  states: [
-    { name: "Find the key", note: "Reward stays 0. The only thing that moves the machine on is reaching the key." },
-    { name: "Open the door", note: "Key collected. The machine changes state, so the agent knows the door comes next." },
-    { name: "Reach the goal", note: "Door open. One subgoal left." },
-    { name: "Done", note: "Goal reached: this transition pays reward 1 and the task is complete." },
-  ],
-  edges: [
-    { event: "got key", reward: 0 },
-    { event: "door open", reward: 0 },
-    { event: "at goal", reward: 1 },
-  ],
+// Half-Cheetah Task 3 from the paper (Sun & Lespérance, EUMAS 2023, Sec. 4.1):
+// start between A and B, then reach A, B, C, B, C and finally D for reward 1000.
+// Each target is one reward machine state, u0 to u5.
+export const cheetahTask = {
+  sequence: ["A", "B", "C", "B", "C", "D"] as const,
+  reward: 1000,
 };
