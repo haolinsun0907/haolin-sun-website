@@ -13,7 +13,9 @@ export default function MotionRoot() {
     const root = document.documentElement;
     root.classList.add("motion-ready");
 
-    // Reveal on scroll
+    // Reveal on scroll. Marks shown elements with a data-in attribute rather
+    // than a class: React rewrites className when a client component
+    // re-renders, which would hide an element that has already been revealed.
     const els = document.querySelectorAll<HTMLElement>("[data-reveal]");
     let io: IntersectionObserver | undefined;
     if ("IntersectionObserver" in window) {
@@ -21,7 +23,7 @@ export default function MotionRoot() {
         (entries) => {
           for (const e of entries) {
             if (e.isIntersecting) {
-              e.target.classList.add("is-in");
+              e.target.setAttribute("data-in", "");
               io?.unobserve(e.target);
             }
           }
@@ -30,7 +32,7 @@ export default function MotionRoot() {
       );
       els.forEach((el) => io?.observe(el));
     } else {
-      els.forEach((el) => el.classList.add("is-in"));
+      els.forEach((el) => el.setAttribute("data-in", ""));
     }
 
     // Cursor spotlight and tilt (mouse and trackpad only)

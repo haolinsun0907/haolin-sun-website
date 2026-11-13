@@ -425,7 +425,7 @@ p {
   background: linear-gradient(90deg, var(--accent), var(--highlight));
 }
 
-.motion .case-results:not(.is-in) .ba-bar {
+.motion .case-results:not([data-in]) .ba-bar {
   width: 0;
 }
 
@@ -593,13 +593,13 @@ p {
   transition: transform 1s var(--ease) 0.5s;
 }
 
-.motion .timeline-item:not(.is-in)::before {
+.motion .timeline-item:not([data-in])::before {
   background: var(--surface);
   border-color: var(--border);
   box-shadow: none;
 }
 
-.motion .timeline-item:not(.is-in)::after {
+.motion .timeline-item:not([data-in])::after {
   transform: scaleY(0);
 }
 
@@ -1056,7 +1056,7 @@ p {
     transform 0.25s ease-out, border-color 0.2s;
 }
 
-.motion [data-reveal].is-in {
+.motion [data-reveal][data-in] {
   opacity: 1;
   translate: 0 0;
 }
