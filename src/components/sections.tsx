@@ -17,6 +17,13 @@ import AgentDemo from "./AgentDemo";
 import CheetahTask from "./CheetahTask";
 import SkillExplorer from "./SkillExplorer";
 import BuildPipeline from "./BuildPipeline";
+import AskChat from "./projects/AskChat";
+import RagFlow from "./projects/RagFlow";
+import ToolHub from "./projects/ToolHub";
+import CodeFixRun from "./projects/CodeFixRun";
+
+// Animated scene for each project card
+const scenes = { chat: AskChat, rag: RagFlow, tools: ToolHub, "code-fix": CodeFixRun };
 
 const nav = [
   { href: "#work", label: "Work" },
@@ -233,6 +240,7 @@ export function Projects() {
       <SectionHeading kicker="Projects" title="Things I've built" />
       <div className="cards">
         {projects.map((p, i) => {
+          const Scene = p.feature && p.feature !== "build-pipeline" ? scenes[p.feature] : null;
           const body = (
             <>
               <div className="card-top">
@@ -242,11 +250,14 @@ export function Projects() {
                 )}
               </div>
               <p>{p.description}</p>
-              <ul className="list">
-                {p.points.map((pt) => (
-                  <li key={pt}>{pt}</li>
-                ))}
-              </ul>
+              <details className="card-more">
+                <summary>How it works</summary>
+                <ul className="list">
+                  {p.points.map((pt) => (
+                    <li key={pt}>{pt}</li>
+                  ))}
+                </ul>
+              </details>
               <div className="card-bottom">
                 <Tags items={p.stack} />
                 {p.link && (
@@ -273,7 +284,10 @@ export function Projects() {
                   <BuildPipeline />
                 </>
               ) : (
-                body
+                <>
+                  {Scene && <Scene />}
+                  {body}
+                </>
               )}
             </article>
           );

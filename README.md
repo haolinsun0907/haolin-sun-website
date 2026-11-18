@@ -17,6 +17,7 @@ src/
   components/AgentDemo.tsx     "Run the agent" replay in the case study
   components/RewardMachine.tsx Animated reward-machine diagram (research)
   components/SkillExplorer.tsx Clickable skill tags
+  components/projects/         Looping animated scene on each project card (timeline.tsx is shared)
   components/motion/           Scroll reveal, count-up, hero network, nav
   content/demo.ts         Fictional data for the demos (keep out of the assistant's knowledge base)
   content/skillUsage.ts   Works out which items mention each skill

@@ -107,13 +107,14 @@ export type Project = {
   description: string;
   points: string[];
   link?: { label: string; href: string };
-  // Full-width card with an animated build-and-deploy pipeline
-  feature?: "build-pipeline";
+  // Animated scene shown on the card. "build-pipeline" makes it a full-width card.
+  feature?: "build-pipeline" | "chat" | "rag" | "tools" | "code-fix";
 };
 
 export const projects: Project[] = [
   {
     name: "Ask Haolin: an agent that answers questions about me",
+    feature: "chat",
     status: "In progress",
     stack: ["LangChain", "LangGraph", "Open-source LLM", "FastAPI", "LangSmith"],
     description:
@@ -126,6 +127,7 @@ export const projects: Project[] = [
   },
   {
     name: "Customer Support Knowledge Assistant",
+    feature: "rag",
     stack: ["Python", "LangChain", "Milvus"],
     description:
       "A retrieval-augmented assistant that answers customer-support questions from a document collection, with sources.",
@@ -138,6 +140,7 @@ export const projects: Project[] = [
   },
   {
     name: "Multi-tool assistant agent",
+    feature: "tools",
     stack: ["LangChain", "Tool Calling", "Prompt Engineering", "Python"],
     description:
       "A chat agent that picks the right tool for each request (weather, math, time and dates, currency conversion, search) and remembers the conversation.",
@@ -149,6 +152,7 @@ export const projects: Project[] = [
   },
   {
     name: "Code-fixing agent with a to-do plan",
+    feature: "code-fix",
     stack: ["LangChain", "Agent Middleware", "pytest", "Python"],
     description:
       "Given a task like \"test and fix my_add.py\", the agent writes itself a to-do list, then reads the code, edits it, and runs the tests.",
