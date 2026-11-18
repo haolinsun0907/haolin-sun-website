@@ -137,6 +137,28 @@ export const projects: Project[] = [
     link: { label: "GitHub", href: "https://github.com/haolinsun0907" },
   },
   {
+    name: "Multi-tool assistant agent",
+    stack: ["LangChain", "Tool Calling", "Prompt Engineering", "Python"],
+    description:
+      "A chat agent that picks the right tool for each request (weather, math, time and dates, currency conversion, search) and remembers the conversation.",
+    points: [
+      "Five tools defined with @tool, each with a detailed docstring and examples, so the model chooses well and can chain several tools in one answer.",
+      "The calculator evaluates expressions with Python built-ins disabled and only a whitelist of math functions available.",
+      "Wrapped in a small class with chat and reset. Tool data is mocked, so the focus stays on the agent's decisions.",
+    ],
+  },
+  {
+    name: "Code-fixing agent with a to-do plan",
+    stack: ["LangChain", "Agent Middleware", "pytest", "Python"],
+    description:
+      "Given a task like \"test and fix my_add.py\", the agent writes itself a to-do list, then reads the code, edits it, and runs the tests.",
+    points: [
+      "TodoListMiddleware gives the agent a planning tool, so it lays out multi-step work before acting.",
+      "Guardrails on the file tools (list, read, write): every path is resolved, and anything outside the workspace folder is refused.",
+      "A test tool runs pytest with a 20-second timeout and hands the exit code and output back to the agent.",
+    ],
+  },
+  {
     name: "This website",
     status: "Live",
     feature: "build-pipeline",
@@ -169,9 +191,10 @@ export const research = {
 };
 
 export const skills: { group: string; items: string[] }[] = [
-  { group: "LLM Applications", items: ["Gemini", "Google ADK", "AI Agents", "Tool Calling", "LangChain", "RAG", "Prompt Engineering", "Pydantic"] },
-  { group: "ML & Retrieval", items: ["PyTorch", "Reinforcement Learning", "Model Evaluation", "Embeddings", "Vector Search", "Milvus"] },
-  { group: "Programming & Data", items: ["Python", "SQL", "PostgreSQL", "Pandas", "NumPy", "ETL", "Tableau"] },
+  { group: "LLM Applications", items: ["Gemini", "Google ADK", "LangChain", "LangGraph", "RAG", "Prompt Engineering", "Structured Output", "Pydantic", "Ollama"] },
+  { group: "Agent Engineering", items: ["AI Agents", "Tool Calling", "Agent Middleware", "Agent Memory", "Human-in-the-Loop", "Guardrails", "Streaming"] },
+  { group: "ML & Retrieval", items: ["PyTorch", "Reinforcement Learning", "Model Evaluation", "Embeddings", "Vector Search", "Milvus", "Document Chunking"] },
+  { group: "Programming & Data", items: ["Python", "SQL", "PostgreSQL", "Pandas", "NumPy", "ETL", "Tableau", "pytest"] },
   { group: "Cloud & Development", items: ["GCP", "Vertex AI", "Docker", "Git", "Linux", "LangSmith"] },
   { group: "Web & AI-Assisted Development", items: ["Next.js", "React", "TypeScript", "Vercel", "Claude Code"] },
 ];

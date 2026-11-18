@@ -24,6 +24,12 @@ const aliases: Record<string, string[]> = {
   "Model Evaluation": ["evaluation", "benchmark"],
   SQL: ["PostgreSQL"],
   GCP: ["Vertex AI"],
+  "Agent Middleware": ["middleware"],
+  "Agent Memory": ["memory", "remember"],
+  "Structured Output": ["structured"],
+  "Document Chunking": ["chunking"],
+  Embeddings: ["embedding"],
+  "Vector Search": ["vector database", "similarity search"],
 };
 
 // Matches to drop, where a word fits but means something else
